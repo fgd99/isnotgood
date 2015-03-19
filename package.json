@@ -1,0 +1,24 @@
+{
+  "name": "isnotgood",
+  "version": "1.0.0",
+  "description": "Site scraper test with a fancy output",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fgd99/isnotgood.git"
+  },
+  "author": "fgd",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fgd99/isnotgood/issues"
+  },
+  "homepage": "https://github.com/fgd99/isnotgood",
+  "dependencies": {
+    "bluebird": "^2.9.14",
+    "jade": "^1.9.2",
+    "x-ray": "^1.0.5"
+  }
+}

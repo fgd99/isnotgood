@@ -1,0 +1,25 @@
+doctype html
+html(lang='fr')
+head
+  meta(charset='utf-8')
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  title Extraction cpasbien
+  link(rel="stylesheet", href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css")
+  link(rel="stylesheet", href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css")
+  link(rel="stylesheet", href="blog.css")
+body
+  h2.brand-title Extraction des fichiers VOSTFR
+  br
+  div#layout.pure-g
+    div.content.pure-u-1
+      each item in results
+        div.posts
+          h1.content-subhead !{item.tag} #{item.taille}
+          section.post
+            header.post-header
+              img.post-avatar(src='#{item.description.cover}', width="96", height="128")
+              h2.post-title
+                a(href='#{item.lien}') #{item.titre}
+              p.post-meta
+                a.post-category.post-category-pure(href='#{item.description.torrent}') torrent
+            div.post-description !{item.description.texteFiche}
