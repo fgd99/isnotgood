@@ -36,7 +36,7 @@ var getAllVOSTFRFiles = bluebird.promisify(function(url, callback) {
       }
     ])
     .paginate('#pagination a:last-child[href]')
-    .limit(10)
+    .limit(5)
     .run(callback);
 });
 
@@ -51,23 +51,14 @@ var render = function(compiledTemplate) {
   });
 };
 
-if (require.main === module) {
-  util.log('-- xray test on cpasbien --');
-
-  // we load and compile the output template
-  var templateFilename = path.join(__dirname, 'template.jade'),
-      compiledTemplate = jade.compileFile(templateFilename, { pretty: true, filename: templateFilename });
-
-  // var urlSeries = 'http://www.cpasbien.pw/view_cat.php?categorie=series';
-  var urlFilms = 'http://www.cpasbien.pw/view_cat.php?categorie=films';
-
-  getAllVOSTFRFiles(urlFilms)
+function generateOutputFor(compiledTemplate, url, outputFilename) {
+  getAllVOSTFRFiles(url)
     .filter(containsVOSTRF)
     .map(getDescription, { concurrency: 5 } )
     .then(render(compiledTemplate))
     .then(function(results) {
       console.log('Writing...');
-      fs.writeFileAsync('cpasbien.html', results)
+      fs.writeFileAsync(outputFilename, results)
         .then(function () {
           console.log('File saved.');
         })
@@ -78,5 +69,19 @@ if (require.main === module) {
     .catch(function (error) {
       console.log(error.stack);
     });
+}
+
+if (require.main === module) {
+  util.log('-- xray test on cpasbien --');
+
+  // we load and compile the output template
+  var templateFilename = path.join(__dirname, 'template.jade'),
+      compiledTemplate = jade.compileFile(templateFilename, { pretty: true, filename: templateFilename });
+
+  var urlSeries = 'http://www.cpasbien.pw/view_cat.php?categorie=series',
+      urlFilms = 'http://www.cpasbien.pw/view_cat.php?categorie=films';
+
+  generateOutputFor(compiledTemplate, urlSeries, 'series.html');
+  generateOutputFor(compiledTemplate, urlFilms, 'films.html');
 }
 
