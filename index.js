@@ -24,7 +24,7 @@ var getDescription = bluebird.promisify(function(item, index, arrayLength, callb
     });
 });
 
-var getAllVOSTFRFiles = bluebird.promisify(function(url, callback) {
+var getAllFiles = bluebird.promisify(function(url, callback) {
   xray(url)
     .select([
       {
@@ -52,7 +52,7 @@ var render = function(compiledTemplate) {
 };
 
 function generateOutputFor(compiledTemplate, url, outputFilename) {
-  getAllVOSTFRFiles(url)
+  getAllFiles(url)
     .filter(containsVOSTRF)
     .map(getDescription, { concurrency: 5 } )
     .then(render(compiledTemplate))
@@ -72,7 +72,7 @@ function generateOutputFor(compiledTemplate, url, outputFilename) {
 }
 
 if (require.main === module) {
-  util.log('-- xray test on cpasbien --');
+  util.log('-- xray on cpasbien --');
 
   // we load and compile the output template
   var templateFilename = path.join(__dirname, 'template.jade'),
