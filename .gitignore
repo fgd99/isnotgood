@@ -28,3 +28,6 @@ node_modules
 .lock-wscript
 films.html
 series.html
+isnotgood.v12.suo
+bin
+obj
