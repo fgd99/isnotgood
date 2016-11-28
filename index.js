@@ -78,8 +78,8 @@ if (require.main === module) {
   var templateFilename = path.join(__dirname, 'template.jade'),
       compiledTemplate = jade.compileFile(templateFilename, { pretty: true, filename: templateFilename });
 
-  var urlSeries = 'http://www.cpasbien.io/view_cat.php?categorie=series',
-      urlFilms = 'http://www.cpasbien.io/view_cat.php?categorie=films';
+  var urlSeries = 'http://www.cpasbien.cm/view_cat.php?categorie=series',
+      urlFilms = 'http://www.cpasbien.cm/view_cat.php?categorie=films';
 
   generateOutputFor(compiledTemplate, urlSeries, 'series.html');
   generateOutputFor(compiledTemplate, urlFilms, 'films.html');
